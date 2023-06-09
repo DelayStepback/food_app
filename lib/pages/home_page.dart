@@ -3,6 +3,7 @@ import 'package:food_app/models/cart_model.dart';
 import 'package:provider/provider.dart';
 
 import '../components/food_item_tile.dart';
+import 'about_page.dart';
 import 'cart_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,13 +39,42 @@ class HomePage extends StatelessWidget {
 
                   'Аппетит приходит во время еды – особенно если едите не вы.', style: TextStyle(fontWeight: FontWeight.normal, fontSize: 20,)),
             ),
-            
+
             SizedBox(height: 4,),
-            
+
             Padding(padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text('Jan Go Food', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36,),
             )),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(22.0) ),
+                elevation: 18.0,
+                color: Color(0xFFFF9429),
+                clipBehavior: Clip.antiAlias,
+                child: MaterialButton(
+
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return AboutPage();
+                      })),
+                  child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('About us', style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),),
+                        Icon(Icons.person),
+                      ],
+                    )),
+              ),
+            ),
+
             SizedBox(height: 24,),
+
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -72,6 +102,7 @@ class HomePage extends StatelessWidget {
                             itemPrice: value.shopItems[index][1],
                             imagePath: value.shopItems[index][2],
                             color: value.shopItems[index][3],
+                            count: value.countOfItemName(value.shopItems[index][0]),
                             onPressed: () {
                               Provider.of<CartModel>(context, listen: false).addItemToCart(index);
                             },

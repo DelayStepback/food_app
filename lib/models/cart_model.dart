@@ -30,6 +30,16 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  int indexLastWhere(String name){
+    for (int i = _cartItems.length-1; i > -1; i--) {
+      if (_cartItems[i][0] == name){
+        return i;
+      }
+    }
+    return -1;
+    return _cartItems.lastWhere((namez) => namez == name);
+  }
+
   // calculate total price
   String calculateTotalPrice(){
     double totalPrice = 0;
@@ -39,4 +49,15 @@ class CartModel extends ChangeNotifier {
     return totalPrice.toStringAsFixed(2);
   }
 
+  
+  String countOfItemName(String name){
+    int count = 0;
+    for (int i = 0; i < _cartItems.length; i++) {
+      if (_cartItems[i][0] == name) {
+        count++;
+      }
+    }
+
+    return count.toString();
+  }
 }
